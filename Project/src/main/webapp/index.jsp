@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <html>
     <head>
         <title>Login System</title>
@@ -42,6 +44,9 @@
 	        	</div>
 	        	<div class="card-footer text-left">
 	        		<input type="submit" value="Login" class="btn btn-primary"/>
+	        		<button class="btn btn-primary"
+				onclick="window.location.href = 'views/employee-form.jsp'">
+				회원 가입</button>
 	        	</div>
        		</div>
         	</form>

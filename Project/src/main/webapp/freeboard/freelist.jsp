@@ -27,24 +27,44 @@ if (id == null) {
 		<p>${NOTIFICATION}</p>
 
 		<p>
-			<button class="btn btn-primary"
-				onclick="window.location.href = 'views/employee-form.jsp'">
-				회원 가입</button>
-				<button class="btn btn-danger"
-				onclick="window.location.href = 'logout.jsp'">
-				로그아웃</button>
+			<button class="btn btn-danger"
+				onclick="window.location.href = 'logout.jsp'">로그아웃</button>
 		</p>
 
 		<table id="datatable" class="table table-striped table-bordered">
 			<thead>
 				<tr class="thead-dark">
-					<th>Name</th>
-					<th>Email</th>
-					<th>Date of birth</th>
-					<th>Actions</th>
+					<th width="10%">번호</th>
+					<th width="*">제목</th>
+					<th width="15%">작성자</th>
+					<th width="10%">조회수</th>
+					<th width="15%">작성일</th>
+					<th width="8%">첨부</th>
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach items="${ boardLists }" var="row" varStatus="loop">
+					<tr align="center">
+						<td>
+							<!-- 번호 --> ${ map.totalCount - (((map.pageNum-1) * map.pageSize) + loop.index)}
+						</td>
+						<td align="left">
+							<!-- 제목(링크) --> <a href="../mvcboard/view.do?idx=${ row.idx }">${ row.title }</a>
+						</td>
+						<td>${ row.name }</td>
+						<!-- 작성자 -->
+						<td>${ row.visitcount }</td>
+						<!-- 조회수 -->
+						<td>${ row.postdate }</td>
+						<!-- 작성일 -->
+						<td>
+							<!-- 첨부 파일 --> <c:if test="${ not empty row.ofile }">
+								<a
+									href="../mvcboard/download.do?ofile=${ row.ofile }&sfile=${ row.sfile }&idx=${ row.idx }">[Down]</a>
+							</c:if>
+						</td>
+					</tr>
+				</c:forEach>
 				<c:forEach items="${list}" var="member">
 					<tr>
 						<td>${member.name}</td>

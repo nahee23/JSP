@@ -27,10 +27,7 @@ if (id == null) {
 		<p>${NOTIFICATION}</p>
 
 		<p>
-			<button class="btn btn-primary"
-				onclick="window.location.href = 'views/employee-form.jsp'">
-				회원 가입</button>
-				<button class="btn btn-danger"
+			<button class="btn btn-danger"
 				onclick="window.location.href = 'logout.jsp'">
 				로그아웃</button>
 		</p>

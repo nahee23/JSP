@@ -31,12 +31,17 @@ public class LoginController extends HttpServlet {
 		String result=loginDAO.loginCheck(login);
 		
 		if(result.equals("true")){
+			 if ("must".equals(login.getId()) && "1234".equals(login.getPassword())) {
 			session.setAttribute("id",login.getId());
 			response.sendRedirect("MemberController?action=LIST");
-		}
+			 } else {
+	        // 일반인 로그인 시 Main.jsp로 리다이렉트
+			session.setAttribute("id",login.getId());
+	        response.sendRedirect("Main.jsp");
+	    }
 		//서블릿 컨텍스트패스 http://localhost:8080/DATABASE
 		//String contextPath = request.getContextPath();
-		 
+		}
 		if(result.equals("false")){
 			response.sendRedirect(request.getContextPath() +"/index.jsp?status=false");
 		}
@@ -46,4 +51,5 @@ public class LoginController extends HttpServlet {
 		}
 		
 	}
+
 }

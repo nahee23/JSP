@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -76,7 +77,7 @@ public class MemberController extends HttpServlet {
 
 		request.setAttribute("list", theList);
 
-		request.getRequestDispatcher("/views/employee-list.jsp").forward(request, response);
+		request.getRequestDispatcher("Main.jsp").forward(request, response);
 	}
 
 	@Override
@@ -93,17 +94,17 @@ public class MemberController extends HttpServlet {
 		e.setPassword(request.getParameter("password"));
 		e.setBirth(request.getParameter("birth"));
 
-		if (idx.isEmpty() || idx == null) {
+		if (idx == null || idx.isEmpty()  ) {
 			//id 가 없으므로 새로 직원 입력
 			if (memberDAO.save(e)) {
-				request.setAttribute("NOTIFICATION", "Employee Saved Successfully!");
+				request.setAttribute("NOTIFICATION", "회원가입이 완료되었습니다!");
 			}
 
 		} else {
 			//id 가 있으므로 기존 직원 수정
 			e.setIdx(Integer.parseInt(idx));
 			if (memberDAO.update(e)) {
-				request.setAttribute("NOTIFICATION", "Employee Updated Successfully!");
+				 request.setAttribute("NOTIFICATION", "회원 정보가 수정되었습니다!");
 			}
 
 		}

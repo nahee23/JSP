@@ -20,15 +20,19 @@ if (id == null) {
 	href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css" />
 </head>
 <body>
+<jsp:include page="/Common/Link.jsp" />  <!-- 공통 링크 -->
+<br>
 	<div class="container">
-		<h1>회원 리스트</h1>
+		<h1>자유 게시판</h1>
 		<hr />
 
 		<p>${NOTIFICATION}</p>
 
 		<p>
+			<button class="btn btn-primary"
+						onclick="location.href='../mvcboard/write.do';">글쓰기</button>
 			<button class="btn btn-danger"
-				onclick="window.location.href = 'logout.jsp'">로그아웃</button>
+				onclick="window.location.href = '../logout.jsp'">로그아웃</button>
 		</p>
 
 		<table id="datatable" class="table table-striped table-bordered">
@@ -65,20 +69,8 @@ if (id == null) {
 						</td>
 					</tr>
 				</c:forEach>
-				<c:forEach items="${list}" var="member">
-					<tr>
-						<td>${member.name}</td>
-						<td>${member.email}</td>
-						<td>${member.birth}</td>
-						<td><a
-							href="${pageContext.request.contextPath}/MemberController?action=EDIT&id=${member.id}">Edit</a>
-							| <a
-							href="${pageContext.request.contextPath}/MemberController?action=DELETE&id=${member.id}">Delete</a>
-						</td>
-					</tr>
-				</c:forEach>
+				
 			</tbody>
-		</table>
 	</div>
 
 	<script

@@ -5,13 +5,29 @@
         <title>Login System</title>
     </head>
  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <body>
+    <style>
+            /* 화면 전체를 채우고 폼을 중앙 정렬 */
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh; /* 뷰포트 높이를 100% 사용 */
+            }
+
+            .card {
+                width: 100%;
+                max-width: 400px; /* 카드의 최대 너비 설정 */
+            }
+        </style>
+    <body class="bg-dark">
+    <jsp:include page="/Common/Link.jsp" />
+	<!-- 공통 링크 -->
         <%
         String id=(String)session.getAttribute("id");
         
         //redirect user to home page if already logged in
         if(id!=null){
-            response.sendRedirect("MemberController?action=LIST");
+            response.sendRedirect("Main.jsp");
         }
  
         String status=request.getParameter("status");

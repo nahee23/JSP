@@ -20,18 +20,18 @@
           <a class="nav-link" href="${pageContext.request.contextPath}/views/Musical.jsp">Musical</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Talk</a>
+          <a class="nav-link" href="${pageContext.request.contextPath}/freeboard/List.jsp">Talk</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Sale</a>
+          <a class="nav-link" href="${pageContext.request.contextPath}/SaleBoard/SaleList.jsp">Sale</a>
         </li>
         <li class="nav-item">
           <% 
           String id=(String)session.getAttribute("id");
           if (session == null || session.getAttribute("id") == null) { %>
-            <a class="nav-link" href="index.jsp">Login</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/index.jsp">Login</a>
         <% } else { %>
-            <a class="nav-link" href="logout.jsp">Logout</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/logout.jsp">Logout</a>
         <% } %>
         </li>
       </ul>

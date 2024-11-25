@@ -77,7 +77,7 @@ public class MemberController extends HttpServlet {
 
 		request.setAttribute("list", theList);
 
-		request.getRequestDispatcher("Main.jsp").forward(request, response);
+		request.getRequestDispatcher("views/employee-list.jsp").forward(request, response);
 	}
 
 	@Override

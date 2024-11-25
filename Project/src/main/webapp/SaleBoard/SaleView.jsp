@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판-상세보기</title>
+<title>양도게시판-상세보기</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -38,6 +38,20 @@
         </section>
 
         <article id="article-content" class="col-md-9 col-lg-8">
+        <table class="table table-bordered w-100">
+        	<tr>
+        		<th colspan="2" class="text-left">공연명 : </th>
+        		
+        	</tr>
+        	<tr>
+        		<td class="text-left">공연날짜 : </td>
+        		<td class="text-left">자리등급 : </td>
+        	</tr>
+        	<tr>
+        		<td class="text-left">가격 : </td>
+        		<td class="text-left">자리수 : </td>
+        	</tr>
+        </table>
             <pre>${ dto.content }</pre>
             <c:if test="${ not empty dto.ofile and isImage eq true }">
         		<br><img src="../Uploads/${ dto.sfile }" style="max-width:100%;"/>
@@ -47,7 +61,7 @@
 
     </div>
     </div>
-
+<br><br>
     <div class="row 9-5">
         <sectoin>
             <form class="row g-3">
@@ -86,6 +100,14 @@
     <!-- 하단 메뉴(버튼) -->
     <div class="row">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-danger me-md-2" type="button" onclick="location.href='../mvcboard/pass.do?mode=edit&idx=${ param.idx }';">
+                구매하기
+            </button>
+          </div>
+         </div>
+         <br>
+    <div class="row">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button class="btn btn-primary me-md-2" type="button" onclick="location.href='../mvcboard/pass.do?mode=edit&idx=${ param.idx }';">
                 수정하기
             </button>
@@ -98,13 +120,13 @@
         </div>
        </div>
       </sectoin>
-     </div>
-    </main>
-</body>
-<script
+      </div>
+      </main>
+      <script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>
+</body>
 </html>

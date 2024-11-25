@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판</title>
+<title>양도게시판</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -92,7 +92,7 @@ a {
 	<!-- 공통 링크 -->
 	<br>
 	<div class="container">
-		<h1 class="text-white">Talk</h1>
+		<h1 class="text-white">Sale</h1>
 		<br>
 
 		<div class="row">
@@ -144,7 +144,7 @@ a {
 					<tr>
 						<th width="10%">번호</th>
 						<th width="*">제목</th>
-						<th width="15%">작성자</th>
+						<th width="15%">가격</th>
 						<th width="10%">조회수</th>
 						<th width="15%">작성일</th>
 						<th width="8%">첨부</th>
@@ -152,7 +152,7 @@ a {
 				</thead>
 				<tbody>
 					<c:choose>
-						<c:when test="${ empty Boardlist }">
+						<c:when test="${ empty boardLists }">
 							<!-- 게시물이 없을 때 -->
 							<tr>
 								<td colspan="6" align="center">등록된 게시물이 없습니다^^*</td>
@@ -160,24 +160,24 @@ a {
 						</c:when>
 						<c:otherwise>
 							<!-- 게시물이 있을 때 -->
-							<c:forEach items="${ Boardlist }" var="board" varStatus="loop">
+							<c:forEach items="${ boardLists }" var="row" varStatus="loop">
 								<tr align="center">
 									<td>
 										<!-- 번호 --> ${ map.totalCount - (((map.pageNum-1) * map.pageSize) + loop.index)}
 									</td>
 									<td align="left">
-										<!-- 제목(링크) --> <a href="/freeboard/View.jsp?idx=${ board.idx }">${ board.title }</a>
+										<!-- 제목(링크) --> <a href="../mvcboard/view.do?idx=${ row.idx }">${ row.title }</a>
 									</td>
-									<td>${ board.name }</td>
+									<td>${ row.name }</td>
 									<!-- 작성자 -->
-									<td>${ board.visitcount }</td>
+									<td>${ row.visitcount }</td>
 									<!-- 조회수 -->
-									<td>${ board.postdate }</td>
+									<td>${ row.postdate }</td>
 									<!-- 작성일 -->
 									<td>
-										<!-- 첨부 파일 --> <c:if test="${ not empty board.ofile }">
+										<!-- 첨부 파일 --> <c:if test="${ not empty row.ofile }">
 											<a
-												href="/freeboard/download.do?ofile=${ board.ofile }&sfile=${ board.sfile }&idx=${ board.idx }">[Down]</a>
+												href="../mvcboard/download.do?ofile=${ row.ofile }&sfile=${ row.sfile }&idx=${ row.idx }">[Down]</a>
 										</c:if>
 									</td>
 								</tr>
@@ -193,7 +193,7 @@ a {
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
 				<button type="button" class="btn btn-primary me-md-2"
-					onclick="location.href='Write.jsp';">글쓰기</button>
+					onclick="location.href='../mvcboard/write.do';">글쓰기</button>
 			</div>
 		</div>
 		<table>

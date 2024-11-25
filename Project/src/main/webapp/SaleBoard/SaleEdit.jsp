@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판-수정하기</title>
+<title>양도게시판-수정하기</title>
 <script type="text/javascript">
     function validateForm(form) {
         if (form.name.value == "") {
@@ -47,32 +47,52 @@
 <table class="table-border" width="100%">
     <tr>
         <td>작성자</td>
-        <td>
-            <input type="text" name="name" style="width:150px;" value="${ dto.name }" />
+        <td colspan="3">
+            <input type="text" name="name" style="width:200px;" value="${ dto.name }" />
         </td>
     </tr>
     <tr>
-        <td>제목</td>
+        <td>공연명</td>
+        <td colspan="3">
+            <input type="text" name="title" style="width:200px;" value="${ dto.title }" />
+        </td>
+    </tr>
+    <tr>
+        <td>공연날짜</td>
         <td>
-            <input type="text" name="title" style="width:90%;" value="${ dto.title }" />
+            <input type="text" name="date" style="width:150px;" value="${ dto.title }" />
+        </td>
+        <td>자리등급</td>
+        <td>
+            <input type="text" name="title" style="width:150px;" value="${ dto.title }" />
+        </td>
+    </tr>
+    <tr>
+        <td>가격</td>
+        <td>
+            <input type="text" name="title" style="width:150px;" value="${ dto.title }" />
+        </td>
+        <td>자리수</td>
+        <td>
+            <input type="text" name="title" style="width:150px;" value="${ dto.title }" />
         </td>
     </tr>
     <tr>
         <td>내용</td>
-        <td>
+        <td colspan="3">
             <textarea name="content" style="width:90%;height:100px;">${ dto.content }</textarea>
         </td>
     </tr>
     <tr>
         <td >첨부 파일</td>
-        <td>
+        <td colspan="3">
             <input type="file" name="ofile" class="mt-3" />
             <br><br>
         </td>
     </tr>
     
     <tr>
-        <td colspan="2" align="center">
+        <td colspan="4" align="center">
             <button class="btn btn-primary me-md-2" type="submit">작성 완료</button>
             <button class="btn btn-primary me-md-2" type="reset">RESET</button>
             <button class="btn btn-primary me-md-2" type="button" onclick="location.href='../mvcboard/list.do';">

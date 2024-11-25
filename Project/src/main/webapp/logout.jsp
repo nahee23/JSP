@@ -1,4 +1,4 @@
 <%
 session.invalidate();
-response.sendRedirect("views/Main.jsp");
+response.sendRedirect("Main.jsp");
 %>

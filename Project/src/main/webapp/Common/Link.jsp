@@ -17,7 +17,7 @@
           <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/Main.jsp">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="${pageContext.request.contextPath}/views/Musical.jsp">Musical</a>
+          <a class="nav-link" href="${pageContext.request.contextPath}/views/ongoing.jsp">Musical</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="${pageContext.request.contextPath}/freeboard/List.jsp">Talk</a>

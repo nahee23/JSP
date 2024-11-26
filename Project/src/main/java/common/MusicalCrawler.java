@@ -11,19 +11,26 @@ import org.jsoup.select.Elements;
 public class MusicalCrawler {
 
 	
-	 public static List<Musical> getMusicalListFromUrl(String url) throws
-	 Exception { Document doc = Jsoup.connect(url).get(); List<Musical> musicals =
-	 new ArrayList<>(); Elements elements = doc.select("#list li"); 
+	 public static List<Musical> getMusicalListFromUrl(String url) throws Exception { 
+		 Document doc = Jsoup.connect(url).get(); 
+		 List<Musical> musicals = new ArrayList<>(); 
+		 Elements elements = doc.select("#list li"); 
 	 // 적합한 CSS	 셀렉터로 수정
 	 
-	 for (Element element : elements) { String title =
-	 element.select(".tit").text(); String date = element.select(".date").text();
-	 String place = element.select(".place").text(); String imageUrl =
-	 element.select(".poster img").attr("src"); if (!imageUrl.startsWith("http"))
-	 { imageUrl = "https://m.playdb.co.kr" + imageUrl; } musicals.add(new
-	 Musical(title, date, place, imageUrl)); }
+	 for (Element element : elements) { 
+	 String title = element.select(".tit").text(); 
+	 String date = element.select(".date").text();
+	 String place = element.select(".place").text(); 
+	 String imageUrl = element.select(".poster img").attr("src"); 
+	 if (!imageUrl.startsWith("http")) {
+		 imageUrl = "https://m.playdb.co.kr" + imageUrl; 
+		 } 
 	 
-	 return musicals; }
+	 	musicals.add(new Musical(title, date, place, imageUrl)); 
+	 	}
+	 
+	 return musicals; 
+	 }
 	 
 
 	public static class Musical {
@@ -69,12 +76,14 @@ public class MusicalCrawler {
 	  String date =  element.select(".date").text(); 
 	  String place =  element.select(".place").text(); 
 	  String imageUrl =  element.select(".poster img").attr("src"); // 이미지 URL 클래스명 수정 필요 
-  if(!imageUrl.startsWith("http")) { imageUrl = "https://m.playdb.co.kr" +
-  imageUrl; } musicals.add(new Musical(title, date, place, imageUrl)); }
+  if(!imageUrl.startsWith("http")) { 
+	  imageUrl = "https://m.playdb.co.kr" +  imageUrl; 
+	  } 
+  musicals.add(new Musical(title, date, place, imageUrl)); 
+  }
   
   return musicals; }
 
 	
 
 }
-

@@ -18,7 +18,7 @@ public class UpcomingMusicalServlet extends HttpServlet {
 		
 		List<MusicalCrawler.Musical> upcomingMusicals;
 		try {
-			if (req.getAttribute("musicals") == null) { 
+			if (req.getAttribute("upcomingMusicals") == null) { 
 			upcomingMusicals = MusicalCrawler.getMusicalListFromUrl(
 					"https://m.playdb.co.kr/Play/List?maincategory=000001&playtype=3&sortby=weekviewcnt");
 		

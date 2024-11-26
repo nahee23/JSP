@@ -16,10 +16,7 @@ public class MusicalServlet extends HttpServlet{
 	        try {
 	            // 크롤링 데이터 가져오기
 	            List<MusicalCrawler.Musical> musicals = MusicalCrawler.getMusicalList();
-	            System.out.println("Musicals size: " + musicals.size());
-	            for (MusicalCrawler.Musical musical : musicals) {
-	                System.out.println(musical.getTitle() + " " + musical.getDate());
-	            }
+
 	            // 데이터를 JSP로 전달
 	            req.setAttribute("musicals", musicals);
 	        } catch (Exception e) {
@@ -27,7 +24,7 @@ public class MusicalServlet extends HttpServlet{
 	        }
 
 	        // JSP로 포워딩
-	        req.getRequestDispatcher("/views/Musical.jsp").forward(req, resp);
+	        req.getRequestDispatcher("views/Musical.jsp").forward(req, resp);
 	    }
 
 }

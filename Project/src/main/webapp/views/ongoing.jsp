@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
 <%     
-if (request.getAttribute("musicals") == null) {
+if (request.getAttribute("ongoingMusicals") == null) {
     String contextPath = request.getContextPath();
     response.sendRedirect(contextPath + "/ongoing");
     return; // 리다이렉트 후 추가 처리 방지
@@ -19,6 +19,10 @@ if (request.getAttribute("musicals") == null) {
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
 <style>
+.nav-link {
+text-decoration : none;
+color : white;
+}
 .card {
 	width: 15rem; /* 카드 너비 */
 	height: 400px; /* 카드 높이 */
@@ -45,19 +49,22 @@ if (request.getAttribute("musicals") == null) {
 	<br>
 	<div class="container">
 		<h1 class="text-white">Musical_Information</h1>
-		<br>
+		<br><br>
+		
 		<!-- 탭 메뉴 -->
         <ul class="nav nav-tabs" id="tabMenu" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link <c:if test="${pageScope.tab == 'ongoing'}">active</c:if>" id="ongoing-tab" href="ongoing.jsp">현재 공연</a>
+                <a class="nav-link active" id="ongoing-tab" href="views/ongoing.jsp">현재 공연</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link <c:if test="${pageScope.tab == 'upcoming'}">active</c:if>" id="upcoming-tab" href="upcoming.jsp">예정 공연</a>
+                <a class="nav-link" id="upcoming-tab" href="views/upcoming.jsp">예정 공연</a>
             </li>
         </ul>
+        <br>
+        
 		<div class="row row-cols-1 row-cols-md-3 g-4">
 			<c:forEach var="musical" items="${ongoingMusicals}">
-				<div class="col">
+				<div class="col flex-grow-0">
 					<div class="card">
 						<img src="${musical.imageUrl}" class="card-img-top"
 							alt="${musical.title}">

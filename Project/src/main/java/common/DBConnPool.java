@@ -1,51 +1,68 @@
 package common;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-public class DBConnPool {
-    public Connection con;
-    public Statement stmt;
-    public PreparedStatement psmt;
-    public ResultSet rs;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-    // 기본 생성자
-    public DBConnPool() {
-        try {
-            // 커넥션 풀(DataSource) 얻기
-            Context initCtx = new InitialContext();
-            Context ctx = (Context)initCtx.lookup("java:comp/env");
-            DataSource source = (DataSource)ctx.lookup("dbcp_myoracle");
 
-            // 커넥션 풀을 통해 연결 얻기
-            con = source.getConnection();
+@WebServlet("/pool")
+public class DBConnPool extends HttpServlet {
 
-            System.out.println("DB 커넥션 풀 연결 성공");
-        }
-        catch (Exception e) {
-            System.out.println("DB 커넥션 풀 연결 실패");
-            e.printStackTrace();
-        }
-    }
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 요청시 DB 연결
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		/* 1. DB 연결
+		 * Connection con = null; try { con = DriverManager.getConnection(
+		 * "jdbc:mysql://localhost:3306/webshop?useSSL=false", "root", "1234");
+		 * out.println("DB 연결 완료"); } catch (SQLException e) {
+		 * out.println("DB에 연결할 수 없습니다.");
+		 * 
+		 * } try { conn.close(); } catch (SQLException e) { // TODO Auto-generated catch
+		 * block e.printStackTrace(); }
+		 */
+		
+		/* 2. 커넥션 풀 연결 */
+		Connection con = null;
+		
+		try{
+			//외부에서 서버 xml 데이터를 읽어들어야 하기에
+			Context initctx =new InitialContext();
+			//톰켓 서버에 정보를 담아놓은 곳으로 이동
+			Context envctx =(Context) initctx.lookup("java:comp/env");
+			//데이터 소스 객체를 선언
+			DataSource ds =(DataSource) envctx.lookup("jdbc/pool");
+			//데이터 소스를 기준으로 커넥션을 연결해주시오
+			con = ds.getConnection();
+			//연결 커넥션 리턴
+			out.println("DB 연결 완료");
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-    // 연결 해제(자원 반납)
-    public void close() {
-        try {            
-            if (rs != null) rs.close();
-            if (stmt != null) stmt.close();
-            if (psmt != null) psmt.close();
-            if (con != null) con.close();  // 자동으로 커넥션 풀로 반납됨
 
-            System.out.println("DB 커넥션 풀 자원 반납");
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	}
 }
+

@@ -24,11 +24,10 @@
         <section class="col-md-3 col-lg-4 order-md-last">
             <aside>
                 <p>${ dto.name }</p>
-                <p>작성자 이메일 주소</p>
                 <p>${ dto.postdate }</p>
                 <p>조회수 : ${ dto.visitcount }</p>
                 <p>첨부파일 : <c:if test="${ not empty dto.ofile }">
-            ${ dto.ofile }
+            ${ board.ofile }
             <a href="../mvcboard/download.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }">
                 [다운로드]
             </a>
@@ -86,13 +85,13 @@
     <!-- 하단 메뉴(버튼) -->
     <div class="row">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='../mvcboard/pass.do?mode=edit&idx=${ param.idx }';">
+            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='${pageContext.request.contextPath}/ListController?mode=edit&idx=${ param.idx }';">
                 수정하기
             </button>
-            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='../mvcboard/pass.do?mode=delete&idx=${ param.idx }';">
+            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='${pageContext.request.contextPath}/ListController?mode=delete&idx=${ param.idx }';">
                 삭제하기
             </button>
-            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='../mvcboard/list.do';">
+            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='${pageContext.request.contextPath}/ListController/action=LIST">
                 목록 바로가기
             </button>
         </div>

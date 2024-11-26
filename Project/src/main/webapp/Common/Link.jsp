@@ -20,7 +20,7 @@
           <a class="nav-link" href="${pageContext.request.contextPath}/views/ongoing.jsp">Musical</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="${pageContext.request.contextPath}/freeboard/List.jsp">Talk</a>
+          <a class="nav-link" href="${pageContext.request.contextPath}/ListController?action=LIST">Talk</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="${pageContext.request.contextPath}/SaleBoard/SaleList.jsp">Sale</a>

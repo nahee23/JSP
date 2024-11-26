@@ -1,7 +1,6 @@
 package board;
 
 import java.util.List;
-import java.util.Map;
 
 import board.BoardDTO;
 
@@ -11,7 +10,7 @@ public interface BoardDAO {
 	//직원목록 가져옴
 		List<BoardDTO> get();
 		//직원 1명 가져옴 (id 입력)
-		BoardDTO get(int idx);
+		BoardDTO get(String idx);
 		//새 직원 입력 (직원 객체 입력)
 		boolean save(BoardDTO board);
 		//직원 삭제 (id 입력)

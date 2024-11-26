@@ -36,7 +36,7 @@
 					<div class="form-group mb-3">
 						<label for="name">이름</label> <input type="text"
 							class="form-control" id="name" name="name"
-							placeholder="Enter Name" value="${member.name}" required>
+							placeholder="Enter Name" required>
 					</div>
 
 					<!-- Email -->

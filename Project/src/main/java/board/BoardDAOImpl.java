@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import board.BoardDTO;
 import common.DBConnection;
 
 public class BoardDAOImpl implements BoardDAO{
@@ -30,14 +31,13 @@ public class BoardDAOImpl implements BoardDAO{
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
 				board = new BoardDTO();
-				board.setIdx(rs.getInt("Idx"));
+				board.setIdx(rs.getInt("idx"));
 				board.setName(rs.getString("name"));
 				board.setTitle(rs.getString("title"));
 				board.setContent(rs.getString("content"));
 				board.setPostdate(rs.getDate("postdate"));
 				board.setOfile(rs.getString("ofile"));
 				board.setSfile(rs.getString("sfile"));
-				board.setDowncount(rs.getInt("downcount"));
 				board.setPass(rs.getString("pass"));
 				board.setVisitcount(rs.getInt("visitcount"));
 				board.setRecommendcount(rs.getInt("recommendcount"));
@@ -51,7 +51,7 @@ public class BoardDAOImpl implements BoardDAO{
 }
 
 	@Override
-	public BoardDTO get(int idx) {
+	public BoardDTO get(String idx) {
 		BoardDTO board = null;
 		try {
 			board = new BoardDTO();
@@ -60,7 +60,7 @@ public class BoardDAOImpl implements BoardDAO{
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
 			if(rs.next()) {
-				board.setIdx(rs.getInt("Idx"));
+				board.setIdx(rs.getInt("idx"));
 				board.setName(rs.getString("name"));
 				board.setTitle(rs.getString("title"));
 				board.setContent(rs.getString("content"));
@@ -82,17 +82,16 @@ public class BoardDAOImpl implements BoardDAO{
 	public boolean save(BoardDTO e) {
 		boolean flag = false;
 		try {
-			String sql = "INSERT INTO freeboard(idx,name, title, content,ofile,sfile, pass) VALUES"
-					+ "(?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO freeboard(name, title, content,ofile,sfile, pass) VALUES"
+					+ "(?,?,?,?,?,?)";
 			con = DBConnection.openConnection();
 			psmt = con.prepareStatement(sql);
-			psmt.setInt(1, e.getIdx() );
-			psmt.setString(2, e.getName() );
-			psmt.setString(3, e.getTitle() );
-			psmt.setString(4, e.getContent() );
-			psmt.setString(5, e.getOfile() );
-			psmt.setString(6, e.getSfile() );
-			psmt.setString(7, e.getPass() );
+			psmt.setString(1, e.getName() );
+			psmt.setString(2, e.getTitle() );
+			psmt.setString(3, e.getContent() );
+			psmt.setString(4, e.getOfile() );
+			psmt.setString(5, e.getSfile() );
+			psmt.setString(6, e.getPass() );
 			
 			psmt.executeUpdate();
 			flag = true;
@@ -106,7 +105,7 @@ public class BoardDAOImpl implements BoardDAO{
 	public boolean delete(int idx) {
 		boolean flag = false;
 		try {
-			String sql = "DELETE FROM MEMBER where idx="+idx;
+			String sql = "DELETE FROM freeboard where idx="+idx;
 			con = DBConnection.openConnection();
 			psmt = con.prepareStatement(sql);
 			psmt.executeUpdate();
@@ -121,7 +120,7 @@ public class BoardDAOImpl implements BoardDAO{
 	public boolean update(BoardDTO board) {
 		boolean flag = false;
 		try {
-			String sql = "UPDATE MEMBER SET name = ?, title = ?, content = ?, ofile = ? , sfile = ? where id= ?";
+			String sql = "UPDATE freeboard SET name = ?, title = ?, content = ?, ofile = ? , sfile = ? where id= ?";
 			con = DBConnection.openConnection();
 			psmt = con.prepareStatement(sql);
 			
@@ -146,9 +145,10 @@ public class BoardDAOImpl implements BoardDAO{
                      + " visitcount=visitcount+1 "
                      + " WHERE idx=?"; 
         try {
+        	con = DBConnection.openConnection();
             psmt = con.prepareStatement(query);
             psmt.setString(1, idx);
-            psmt.executeQuery();
+            psmt.executeUpdate();
         }
         catch (Exception e) {
             System.out.println("게시물 조회수 증가 중 예외 발생");
@@ -162,6 +162,7 @@ public class BoardDAOImpl implements BoardDAO{
                 + " downcount=downcount+1 "
                 + " WHERE idx=? "; 
         try {
+        	con = DBConnection.openConnection();
             psmt = con.prepareStatement(sql);
             psmt.setString(1, idx);
             psmt.executeUpdate();
@@ -174,6 +175,7 @@ public class BoardDAOImpl implements BoardDAO{
                 + " recommendcount=recommendcount+1 "
                 + " WHERE idx=? "; 
         try {
+        	con = DBConnection.openConnection();
             psmt = con.prepareStatement(sql);
             psmt.setString(1, idx);
             psmt.executeUpdate();
@@ -185,6 +187,7 @@ public class BoardDAOImpl implements BoardDAO{
         boolean isCorr = true;
         try {
             String sql = "SELECT COUNT(*) FROM freeboard WHERE pass=? AND idx=?";
+            con = DBConnection.openConnection();
             psmt = con.prepareStatement(sql);
             psmt.setString(1, pass);
             psmt.setString(2, idx);

@@ -139,7 +139,7 @@ a {
 
 		<!-- 목록 테이블 -->
 		<div class="row bg-white">
-			<table class="table" id="article-table">
+			<table class="table" id="datatable">
 				<thead>
 					<tr>
 						<th width="10%">번호</th>
@@ -160,13 +160,14 @@ a {
 						</c:when>
 						<c:otherwise>
 							<!-- 게시물이 있을 때 -->
-							<c:forEach items="${ Boardlist }" var="board" varStatus="loop">
+							<c:forEach items="${ Boardlist }" var="board">
 								<tr align="center">
-									<td>
-										<!-- 번호 --> ${ map.totalCount - (((map.pageNum-1) * map.pageSize) + loop.index)}
-									</td>
+									 <td>
+									 ${ board.idx }
+										<!-- ${ map.totalCount - (((map.pageNum-1) * map.pageSize) + loop.index)} -->
+									</td> 
 									<td align="left">
-										<!-- 제목(링크) --> <a href="/freeboard/View.jsp?idx=${ board.idx }">${ board.title }</a>
+										<!-- 제목(링크) --> <a href="${pageContext.request.contextPath}/ListController?action=VIEW&idx=${ board.idx }">${ board.title }</a>
 									</td>
 									<td>${ board.name }</td>
 									<!-- 작성자 -->
@@ -193,7 +194,7 @@ a {
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
 				<button type="button" class="btn btn-primary me-md-2"
-					onclick="location.href='Write.jsp';">글쓰기</button>
+					onclick="location.href='freeboard/Write.jsp'">글쓰기</button>
 			</div>
 		</div>
 		<table>
@@ -209,4 +210,6 @@ a {
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>
+		<!-- 데이터 테이블 JS -->
+	<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 </html>

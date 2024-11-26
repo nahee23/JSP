@@ -28,6 +28,7 @@
 			form.pass.focus();
 			return false;
 		}
+		form.submit();
 	}
 </script>
 <link
@@ -43,37 +44,37 @@
 	<main class="container">
 		<h2>Write</h2>
 
-		<form name="writeFrm" method="post" enctype="multipart/form-data"
-			action="/ListController" onsubmit="return validateForm(this);">
-
-			<br>
+		<form 
+			action="${pageContext.request.contextPath}/ListController" method="POST"  >
+				<br>
 			<table class="table-border" width="100%">
 				<tr>
 					<td>작성자</td>
-					<td colspan="3"><input type="text" name="name" style="width: 150px;" /></td>
+					<td colspan="3"><input type="text" name="name" style="width: 150px;"required/></td>
 				</tr>
 				<tr>
 					<td>제목</td>
-					<td colspan="3"><input type="text" name="title" style="width: 300px;" /></td>
+					<td colspan="3"><input type="text" name="title" style="width: 300px;"required/></td>
 				</tr>
 				<tr>
 					<td>내용</td>
 					<td colspan="3"><textarea name="content"
-							style="width: 90%; height: 100px;"></textarea></td>
+							style="width: 90%; height: 100px;"required></textarea></td>
 				</tr>
 				<tr>
 					<td>첨부 파일</td>
 					<td><input type="file" name="ofile" class="mt-3" /> <br>
 					<br></td>
 					<td>비밀번호</td>
-					<td><input type="password" name="pass" style="width: 100px;" />
+					<td><input type="password" name="pass" style="width: 100px;"required/>
+					<input type="hidden" name="idx" value="${board.idx}" /> 
 					</td>
 				</tr>
 
 				<tr>
 					<td colspan="4" align="center">
-						<button class="btn btn-primary me-md-2" type="submit">작성
-							완료</button>
+						<input class="btn btn-primary me-md-2" value="작성완료" type="submit">
+							
 						<button class="btn btn-primary me-md-2" type="reset">RESET</button>
 						<button class="btn btn-primary me-md-2" type="button"
 							onclick="location.href='List.jsp';">목록 바로가기</button>
@@ -81,6 +82,8 @@
 				</tr>
 			</table>
 		</form>
+		
+		
 	</main>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

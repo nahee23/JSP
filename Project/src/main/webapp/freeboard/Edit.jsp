@@ -39,28 +39,28 @@
 <h2>Edit</h2>
 
 <form name="writeFrm" method="post" enctype="multipart/form-data" action="../mvcboard/edit.do" onsubmit="return validateForm(this);">
-<input type="hidden" name="idx" value="${ dto.idx }"/>
-<input type="hidden" name="prevOfile" value="${ dto.ofile }" />
-<input type="hidden" name="prevSfile" value="${ dto.sfile }" />
+<input type="hidden" name="idx" value="${ board.idx }"/>
+<input type="hidden" name="prevOfile" value="${ board.ofile }" />
+<input type="hidden" name="prevSfile" value="${ board.sfile }" />
     
     <br>
 <table class="table-border" width="100%">
     <tr>
         <td>작성자</td>
         <td>
-            <input type="text" name="name" style="width:150px;" value="${ dto.name }" />
+            <input type="text" name="name" style="width:150px;" value="${ board.name }" />
         </td>
     </tr>
     <tr>
         <td>제목</td>
         <td>
-            <input type="text" name="title" style="width:90%;" value="${ dto.title }" />
+            <input type="text" name="title" style="width:90%;" value="${ board.title }" />
         </td>
     </tr>
     <tr>
         <td>내용</td>
         <td>
-            <textarea name="content" style="width:90%;height:100px;">${ dto.content }</textarea>
+            <textarea name="content" style="width:90%;height:100px;">${ board.content }</textarea>
         </td>
     </tr>
     <tr>
@@ -75,7 +75,7 @@
         <td colspan="2" align="center">
             <button class="btn btn-primary me-md-2" type="submit">작성 완료</button>
             <button class="btn btn-primary me-md-2" type="reset">RESET</button>
-            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='../mvcboard/list.do';">
+            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='/freeboard/List.jsp';">
                 목록 바로가기
             </button>
         </td>

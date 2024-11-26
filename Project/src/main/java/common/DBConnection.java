@@ -24,7 +24,7 @@ public class DBConnection {
 			try {
 				Class.forName(DRIVER);
 				connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				// System.out.println("연결완료!");
+				System.out.println("연결완료!");
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (SQLException e) {

@@ -23,7 +23,7 @@
           <a class="nav-link" href="${pageContext.request.contextPath}/ListController?action=LIST">Talk</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="${pageContext.request.contextPath}/SaleBoard/SaleList.jsp">Sale</a>
+          <a class="nav-link" href="${pageContext.request.contextPath}/SaleController?action=LIST">Sale</a>
         </li>
         <li class="nav-item">
           <% 

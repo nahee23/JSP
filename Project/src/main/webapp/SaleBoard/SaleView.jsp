@@ -18,43 +18,41 @@
 	<br>
 <main class="container">
     <header class="py-5">
-        <h2> ${dto.title} </h2>
+        <h2> ${sale.sale_title} </h2>
     </header>
     <div class="row g-5">
         <section class="col-md-3 col-lg-4 order-md-last">
             <aside>
-                <p>${ dto.name }</p>
-                <p>작성자 이메일 주소</p>
-                <p>${ dto.postdate }</p>
-                <p>조회수 : ${ dto.visitcount }</p>
-                <p>첨부파일 : <c:if test="${ not empty dto.ofile }">
+                <p>${ sale.name }</p>
+                <p>${ sale.postdate }</p>
+                <p>조회수 : ${ sale.visitcount }</p>
+                <p>첨부파일 : <c:if test="${ not empty sale.ofile }">
             ${ dto.ofile }
-            <a href="../mvcboard/download.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }">
+            <a href="../mvcboard/download.do?ofile=${ sale.ofile }&sfile=${ sale.sfile }&idx=${ sale.idx }">
                 [다운로드]
             </a>
             </c:if></p>
-            <p>다운로드수 : ${ dto.downcount }</p>
             </aside>
         </section>
 
         <article id="article-content" class="col-md-9 col-lg-8">
         <table class="table table-bordered w-100">
         	<tr>
-        		<th colspan="2" class="text-left">공연명 : </th>
+        		<th colspan="2" class="text-left">공연명 : ${sale.performance_name}</th>
         		
         	</tr>
         	<tr>
-        		<td class="text-left">공연날짜 : </td>
-        		<td class="text-left">자리등급 : </td>
+        		<td colspan="2" class="text-left">공연날짜 : ${sale.performance_datetime}</td>
+        		
         	</tr>
         	<tr>
-        		<td class="text-left">가격 : </td>
-        		<td class="text-left">자리수 : </td>
+        		<td class="text-left">가격 : ${sale.price} </td>
+        		<td class="text-left">자리등급 : ${sale.grade}</td>
         	</tr>
         </table>
-            <pre>${ dto.content }</pre>
-            <c:if test="${ not empty dto.ofile and isImage eq true }">
-        		<br><img src="../Uploads/${ dto.sfile }" style="max-width:100%;"/>
+            <pre>${ sale.sale_content }</pre>
+            <c:if test="${ not empty sale.ofile and isImage eq true }">
+        		<br><img src="../Uploads/${ sale.sfile }" style="max-width:100%;"/>
         	</c:if>
         </article>
 
@@ -108,13 +106,15 @@
          <br>
     <div class="row">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='../mvcboard/pass.do?mode=edit&idx=${ param.idx }';">
+        <c:if test="${ sessionScope.name == sale.name }">
+            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='${pageContext.request.contextPath}/SaleController?action=EDIT&idx=${ param.idx }';">
                 수정하기
             </button>
-            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='../mvcboard/pass.do?mode=delete&idx=${ param.idx }';">
+            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='${pageContext.request.contextPath}/SaleController?action=DELETE&idx=${ param.idx }';">
                 삭제하기
             </button>
-            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='../mvcboard/list.do';">
+           </c:if>
+            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='${pageContext.request.contextPath}/SaleController?action=LIST';">
                 목록 바로가기
             </button>
         </div>

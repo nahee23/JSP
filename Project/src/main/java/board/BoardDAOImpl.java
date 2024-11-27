@@ -67,7 +67,6 @@ public class BoardDAOImpl implements BoardDAO{
 				board.setPostdate(rs.getDate("postdate"));
 				board.setOfile(rs.getString("ofile"));
 				board.setSfile(rs.getString("sfile"));
-				board.setDowncount(rs.getInt("downcount"));
 				board.setPass(rs.getString("pass"));
 				board.setVisitcount(rs.getInt("visitcount"));
 				board.setRecommendcount(rs.getInt("recommendcount"));
@@ -120,7 +119,7 @@ public class BoardDAOImpl implements BoardDAO{
 	public boolean update(BoardDTO board) {
 		boolean flag = false;
 		try {
-			String sql = "UPDATE freeboard SET name = ?, title = ?, content = ?, ofile = ? , sfile = ? where id= ?";
+			String sql = "UPDATE freeboard SET name = ?, title = ?, content = ?, ofile = ? , sfile = ? where idx= ?";
 			con = DBConnection.openConnection();
 			psmt = con.prepareStatement(sql);
 			
@@ -156,20 +155,7 @@ public class BoardDAOImpl implements BoardDAO{
         }
     }
 
-    // 다운로드 횟수를 1 증가시킵니다.
-    public void downCountPlus(String idx) {
-        String sql = "UPDATE freeboard SET "
-                + " downcount=downcount+1 "
-                + " WHERE idx=? "; 
-        try {
-        	con = DBConnection.openConnection();
-            psmt = con.prepareStatement(sql);
-            psmt.setString(1, idx);
-            psmt.executeUpdate();
-        }
-        catch (Exception e) {}
-    }
- // 다운로드 횟수를 1 증가시킵니다.
+ // 추천 횟수를 1 증가시킵니다.
     public void recommendCountPlus(String idx) {
         String sql = "UPDATE freeboard SET "
                 + " recommendcount=recommendcount+1 "

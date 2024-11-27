@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ include file="../Login/IsLoggedIn.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@
                 [다운로드]
             </a>
             </c:if></p>
-            <p>다운로드수 : ${ dto.downcount }</p>
+            <p>추천수 : ${ dto.recommendcount }</p>
             </aside>
         </section>
 
@@ -84,14 +85,23 @@
 
     <!-- 하단 메뉴(버튼) -->
     <div class="row">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+         <button class="btn btn-primary me-md-2" type="button" onclick="location.href='${pageContext.request.contextPath}/ListController?action=PLUS&idx=${ param.idx }';">추천하기</button>
+    </div>
+</div>
+<br>
+    <div class="row">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='${pageContext.request.contextPath}/ListController?mode=edit&idx=${ param.idx }';">
+        <!-- 본인이 작성한 글일 때만 버튼 표시 -->
+        <c:if test="${ sessionScope.name == dto.name }">
+            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='${pageContext.request.contextPath}/ListController?action=EDIT&idx=${ param.idx }';">
                 수정하기
             </button>
-            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='${pageContext.request.contextPath}/ListController?mode=delete&idx=${ param.idx }';">
+            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='${pageContext.request.contextPath}/ListController?action=DELETE&idx=${ param.idx }';">
                 삭제하기
             </button>
-            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='${pageContext.request.contextPath}/ListController/action=LIST">
+            </c:if>
+            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='${pageContext.request.contextPath}/ListController?action=LIST';">
                 목록 바로가기
             </button>
         </div>

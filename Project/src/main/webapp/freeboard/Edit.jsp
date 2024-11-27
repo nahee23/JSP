@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ include file="../Login/IsLoggedIn.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +39,7 @@
 	<main class="container">
 <h2>Edit</h2>
 
-<form name="writeFrm" method="post" enctype="multipart/form-data" action="../mvcboard/edit.do" onsubmit="return validateForm(this);">
+<form name="writeFrm" method="POST" action="${pageContext.request.contextPath}/ListController" onsubmit="return validateForm(this);">
 <input type="hidden" name="idx" value="${ board.idx }"/>
 <input type="hidden" name="prevOfile" value="${ board.ofile }" />
 <input type="hidden" name="prevSfile" value="${ board.sfile }" />
@@ -75,7 +76,7 @@
         <td colspan="2" align="center">
             <button class="btn btn-primary me-md-2" type="submit">작성 완료</button>
             <button class="btn btn-primary me-md-2" type="reset">RESET</button>
-            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='/freeboard/List.jsp';">
+            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='${pageContext.request.contextPath}/ListController?action=LIST';">
                 목록 바로가기
             </button>
         </td>

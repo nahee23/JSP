@@ -13,12 +13,12 @@
             form.name.focus();
             return false;
         }
-        if (form.title.value == "") {
+        if (form.sale_title.value == "") {
             alert("제목을 입력하세요.");
             form.title.focus();
             return false;
         }
-        if (form.content.value == "") {
+        if (form.sale_content.value == "") {
             alert("내용을 입력하세요.");
             form.content.focus();
             return false;
@@ -38,49 +38,52 @@
 	<main class="container">
 <h2>Edit</h2>
 
-<form name="writeFrm" method="post" enctype="multipart/form-data" action="../mvcboard/edit.do" onsubmit="return validateForm(this);">
-<input type="hidden" name="idx" value="${ dto.idx }"/>
-<input type="hidden" name="prevOfile" value="${ dto.ofile }" />
-<input type="hidden" name="prevSfile" value="${ dto.sfile }" />
+<form name="writeFrm" method="post"  action="${pageContext.request.contextPath}/SaleController" onsubmit="return validateForm(this);">
+<input type="hidden" name="idx" value="${ sale.idx }"/>
+<input type="hidden" name="prevOfile" value="${ sale.ofile }" />
+<input type="hidden" name="prevSfile" value="${ sale.sfile }" />
     
     <br>
 <table class="table-border" width="100%">
     <tr>
         <td>작성자</td>
         <td colspan="3">
-            <input type="text" name="name" style="width:200px;" value="${ dto.name }" />
+            <input type="text" name="name" style="width:200px;" value="${ sale.name }" />
         </td>
     </tr>
     <tr>
         <td>공연명</td>
         <td colspan="3">
-            <input type="text" name="title" style="width:200px;" value="${ dto.title }" />
+            <input type="text" name="performance_name" style="width:200px;" value="${ sale.performance_name }" />
         </td>
     </tr>
     <tr>
         <td>공연날짜</td>
-        <td>
-            <input type="text" name="date" style="width:150px;" value="${ dto.title }" />
+        <td colspan="3">
+            <input type="text" name="performance_datetime" style="width:150px;" value="${ sale.performance_datetime }" />
         </td>
-        <td>자리등급</td>
-        <td>
-            <input type="text" name="title" style="width:150px;" value="${ dto.title }" />
-        </td>
+        
     </tr>
     <tr>
         <td>가격</td>
         <td>
-            <input type="text" name="title" style="width:150px;" value="${ dto.title }" />
+            <input type="text" name="price" style="width:150px;" value="${ sale.price }" />
         </td>
-        <td>자리수</td>
+        <td>자리등급</td>
         <td>
-            <input type="text" name="title" style="width:150px;" value="${ dto.title }" />
+            <input type="text" name="grade" style="width:150px;" value="${ sale.grade }" />
+        </td>
+    </tr>
+    <tr>
+        <td>제목</td>
+        <td colspan="3">
+            <input type="text" name="sale_title" style="width:90%;" value="${ sale.sale_title} "/>
         </td>
     </tr>
     <tr>
         <td>내용</td>
         <td colspan="3">
-            <textarea name="content" style="width:90%;height:100px;">${ dto.content }</textarea>
+            <textarea name="sale_content" style="width:90%;height:100px;">${ sale.sale_content }</textarea>
         </td>
     </tr>
     <tr>
@@ -95,7 +98,7 @@
         <td colspan="4" align="center">
             <button class="btn btn-primary me-md-2" type="submit">작성 완료</button>
             <button class="btn btn-primary me-md-2" type="reset">RESET</button>
-            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='../mvcboard/list.do';">
+            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='${pageContext.request.contextPath}/SaleController?action=LIST';">
                 목록 바로가기
             </button>
         </td>

@@ -95,48 +95,6 @@ a {
 		<h1 class="text-white">Talk</h1>
 		<br>
 
-		<div class="row">
-			<div class="card card-margin search-form">
-				<div class="card-body p-0">
-					<!-- 검색 폼 -->
-					<form id="search-form" method="get">
-						<div class="row">
-							<div class="col-12">
-								<div class="row no-gutters">
-									<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-										<label for="search-type" hidden>검색 유형</label> <select
-											class="form-control" id="search-type" name="searchField">
-											<option value="title">제목</option>
-											<option value="content">내용</option>
-										</select>
-									</div>
-									<div class="col-lg-8 col-md-6 col-sm-12 p-0">
-										<label for="search-value" hidden>검색어</label> <input
-											type="text" placeholder="검색어..." class="form-control"
-											id="search-value" name="searchWord" />
-									</div>
-									<div class="col-lg-1 col-md-3 col-sm-12 p-0">
-										<button type="submit" class="btn btn-base">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24"
-												height="24" viewBox="0 0 24 24" fill="none"
-												stroke="currentColor" stroke-width="2"
-												stroke-linecap="round" stroke-linejoin="round"
-												class="feather feather-search">
-                                            <circle cx="11" cy="11"
-													r="8"></circle>
-                                            <line x1="21" y1="21"
-													x2="16.65" y2="16.65"></line>
-                                        </svg>
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-
 		<!-- 목록 테이블 -->
 		<div class="row bg-white">
 			<table class="table" id="datatable">
@@ -147,7 +105,7 @@ a {
 						<th width="15%">작성자</th>
 						<th width="10%">조회수</th>
 						<th width="15%">작성일</th>
-						<th width="8%">첨부</th>
+						<th width="10%">추천수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -176,10 +134,7 @@ a {
 									<td>${ board.postdate }</td>
 									<!-- 작성일 -->
 									<td>
-										<!-- 첨부 파일 --> <c:if test="${ not empty board.ofile }">
-											<a
-												href="/freeboard/download.do?ofile=${ board.ofile }&sfile=${ board.sfile }&idx=${ board.idx }">[Down]</a>
-										</c:if>
+										${ board.recommendcount }
 									</td>
 								</tr>
 							</c:forEach>
@@ -191,17 +146,12 @@ a {
 
 		<!-- 하단 메뉴(바로가기, 글쓰기) -->
 		<div class="row bg-white">
-			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
 
 				<button type="button" class="btn btn-primary me-md-2"
 					onclick="location.href='freeboard/Write.jsp'">글쓰기</button>
 			</div>
 		</div>
-		<table>
-			<tr>
-				<td>${ map.pagingImg }</td>
-			</tr>
-		</table>
 	</div>
 </body>
 <script
@@ -212,4 +162,26 @@ a {
 		crossorigin="anonymous"></script>
 		<!-- 데이터 테이블 JS -->
 	<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("#datatable").DataTable({
+				language : {
+					lengthMenu : "표시할 줄수 선택    _MENU_",
+					search : "검색",
+					paginate : {
+						previous : "이전",
+						next : "다음"
+					},
+					info : "페이지 _PAGE_ / _PAGES_",
+					infoEmpty : "데이터가 없습니다.",
+					infoFiltered : "(전체 페이지 _MAX_ 에서 검색)",
+					thousands : ",",
+				},
+				lengthMenu : [ 5, 10, 25 ],
+				pageLength : 5,
+				ordering : false,
+				stateSave : true,
+			});
+		});
+	</script>
 </html>

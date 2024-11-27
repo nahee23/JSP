@@ -13,12 +13,12 @@
             form.name.focus();
             return false;
         }
-        if (form.title.value == "") {
+        if (form.sale_title.value == "") {
             alert("제목을 입력하세요.");
             form.title.focus();
             return false;
         }
-        if (form.content.value == "") {
+        if (form.sale_content.value == "") {
             alert("내용을 입력하세요.");
             form.content.focus();
             return false;
@@ -43,7 +43,7 @@
 	<main class="container">
 <h2>Write</h2>
 
-<form name="writeFrm" method="post" enctype="multipart/form-data" action="../mvcboard/write.do" onsubmit="return validateForm(this);">
+<form name="writeFrm" method="POST" action="${pageContext.request.contextPath}/SaleController" onsubmit="return validateForm(this);">
 
     
     <br>
@@ -57,33 +57,36 @@
     <tr>
         <td>공연명</td>
         <td colspan="3">
-            <input type="text" name="title" style="width:200px;" />
+            <input type="text" name="performance_name" style="width:200px;" />
         </td>
     </tr>
     <tr>
-        <td>공연날짜</td>
-        <td>
-            <input type="text" name="date" style="width:150px;" />
+        <td>공연날짜⦁시간</td>
+        <td colspan="3">
+            <input type="datetime-local" id="performanceDatetime" style="width:200px;" name="performance_datetime" required>
         </td>
-        <td>자리등급</td>
-        <td>
-            <input type="text" name="title" style="width:150px;" />
-        </td>
+        
     </tr>
     <tr>
         <td>가격</td>
         <td>
-            <input type="text" name="title" style="width:150px;" />
+            <input type="text" name="price" style="width:150px;" />
         </td>
-        <td>자리수</td>
+        <td>자리등급</td>
         <td>
-            <input type="text" name="title" style="width:150px;" />
+            <input type="text" name="grade" style="width:150px;" />
+        </td>
+    </tr>
+    <tr>
+        <td>제목</td>
+        <td colspan="3">
+            <input type="text" name="sale_title" style="width:90%;" />
         </td>
     </tr>
     <tr>
         <td>내용</td>
         <td colspan="3">
-            <textarea name="content" style="width:90%;height:100px;"></textarea>
+            <textarea name="sale_content" style="width:90%;height:100px;"></textarea>
         </td>
     </tr>
     <tr>
@@ -101,7 +104,7 @@
         <td colspan="4" align="center">
             <button class="btn btn-primary me-md-2" type="submit">작성 완료</button>
             <button class="btn btn-primary me-md-2" type="reset">RESET</button>
-            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='../mvcboard/list.do';">
+            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='${pageContext.request.contextPath}/SaleController?action=LIST';">
                 목록 바로가기
             </button>
         </td>

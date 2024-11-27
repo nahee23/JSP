@@ -27,6 +27,7 @@ public class LoginController extends HttpServlet {
 		MemberDTO login = new MemberDTO();
 		login.setId(request.getParameter("id"));
 		login.setPassword(request.getParameter("password"));
+		login.setName(request.getParameter("name"));
 		
 		String result=loginDAO.loginCheck(login);
 		
@@ -37,6 +38,8 @@ public class LoginController extends HttpServlet {
 			 } else {
 	        // 일반인 로그인 시 Main.jsp로 리다이렉트
 			session.setAttribute("id",login.getId());
+			session.setAttribute("name", login.getName());
+			System.out.println("저장된 name: " + session.getAttribute("name"));
 	        response.sendRedirect("Main.jsp");
 	    }
 		//서블릿 컨텍스트패스 http://localhost:8080/DATABASE

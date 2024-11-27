@@ -51,7 +51,7 @@
 		<p class="text-white">뮤지컬에 대한 정보 조회 및 자유로운 대화, 티켓 양도가 가능합니다.</p>
 
 		<p>
-			<button class="btn btn-secondary" onclick="location.href='views/Musical.jsp';">바로가기</button>
+			<button class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/views/ongoing.jsp'">바로가기</button>
 		</p>
 		<br>
 

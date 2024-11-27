@@ -18,10 +18,11 @@ String query="select * from MEMBER where ID=? and password=?";
 			PreparedStatement ps=con.prepareStatement(query);
 			ps.setString(1, loginBean.getId() );
 			ps.setString(2, loginBean.getPassword() );
-			
+				
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()){
+				loginBean.setName(rs.getString("name")); // 이름 설정
 				return "true";
 			}
 			else{

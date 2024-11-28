@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -118,10 +119,10 @@ a {
 						</c:when>
 						<c:otherwise>
 							<!-- 게시물이 있을 때 -->
-							<c:forEach items="${ Boardlist }" var="board">
+							<c:forEach items="${ Boardlist }" var="board" varStatus="status">
 								<tr align="center">
 									 <td>
-									 ${ board.idx }
+									${fn:length(Boardlist) - status.index} <!-- fn:length로 리스트 크기 계산 -->
 										<!-- ${ map.totalCount - (((map.pageNum-1) * map.pageSize) + loop.index)} -->
 									</td> 
 									<td align="left">

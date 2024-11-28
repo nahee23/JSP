@@ -26,7 +26,7 @@ public class SaleDAOImpl implements SaleDAO{
 		
 		try {			
 			Salelist = new ArrayList<SaleDTO>();
-			String sql = "SELECT * FROM saleticket";
+			String sql = "SELECT * FROM saleticket ORDER BY postdate DESC";
 			con = DBConnection.openConnection();
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);

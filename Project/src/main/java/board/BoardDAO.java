@@ -10,7 +10,7 @@ public interface BoardDAO {
 	//직원목록 가져옴
 		List<BoardDTO> get();
 		//직원 1명 가져옴 (id 입력)
-		BoardDTO get(String idx);
+		BoardDTO get(int idx);
 		//새 직원 입력 (직원 객체 입력)
 		boolean save(BoardDTO board);
 		//직원 삭제 (id 입력)
@@ -19,10 +19,10 @@ public interface BoardDAO {
 		boolean update(BoardDTO board);
 
 		// 주어진 일련번호에 해당하는 게시물의 조회수를 1 증가시킵니다.
-		void updateVisitCount(String idx) ;
+		void updateVisitCount(int idx) ;
  
 		// 추천 횟수를 1 증가시킵니다.
-		void recommendCountPlus(String idx) ;
+		void recommendCountPlus(int idx) ;
      
 		// 입력한 비밀번호가 지정한 일련번호의 게시물의 비밀번호와 일치하는지 확인합니다.
 		boolean confirmPassword(String pass, String idx) ;

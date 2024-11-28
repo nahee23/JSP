@@ -161,11 +161,33 @@ public class SaleController extends HttpServlet {
 			}
 
 		} else {
-			//id 가 있으므로 기존 직원 수정
-			e.setIdx(Integer.parseInt(idx));
-			if (saleDAO.update(e)) {
-				 request.setAttribute("NOTIFICATION", "수정되었습니다!");
+			// idx가 있으므로 기존 게시글 수정
+	        // 수정하려면 비밀번호를 확인해야 한다
+	        boolean isPasswordCorrect = saleDAO.confirmPassword(pass, idx);
+	        if (!isPasswordCorrect) {
+	            // 비밀번호가 일치하지 않으면 수정 불가
+	            request.setAttribute("NOTIFICATION", "비밀번호가 일치하지 않습니다.");
+	            
+	            String referer = request.getHeader("Referer");
+	            
+	         // 이전 페이지가 있을 경우 해당 페이지로 포워드 또는 리다이렉트
+	            if (referer != null && !referer.isEmpty()) {
+	                response.sendRedirect(referer); // 이전 페이지로 리다이렉트
+	                return; // 리다이렉트 후 추가 코드 실행 방지
+	            }
+	            
+	            request.getRequestDispatcher("Main.jsp").forward(request, response);
+	            return;  // 비밀번호 오류 시 뒤로 가기
+	        }
+
+	        // 비밀번호가 일치하면 수정 진행
+	        e.setIdx(Integer.parseInt(idx));
+	        if (saleDAO.update(e)) {
+	            request.setAttribute("NOTIFICATION", "수정되었습니다!");
+	        
 			}
+
+		
 
 		}
 

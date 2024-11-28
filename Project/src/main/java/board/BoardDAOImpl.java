@@ -25,7 +25,7 @@ public class BoardDAOImpl implements BoardDAO{
 		
 		try {			
 			Boardlist = new ArrayList<BoardDTO>();
-			String sql = "SELECT * FROM freeboard";
+			String sql = "SELECT * FROM freeboard ORDER BY postdate DESC";
 			con = DBConnection.openConnection();
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
@@ -51,7 +51,7 @@ public class BoardDAOImpl implements BoardDAO{
 }
 
 	@Override
-	public BoardDTO get(String idx) {
+	public BoardDTO get(int idx) {
 		BoardDTO board = null;
 		try {
 			board = new BoardDTO();
@@ -139,31 +139,31 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
     // 주어진 일련번호에 해당하는 게시물의 조회수를 1 증가시킵니다.
-    public void updateVisitCount(String idx) {
+    public void updateVisitCount(int idx) {
         String query = "UPDATE freeboard SET "
                      + " visitcount=visitcount+1 "
                      + " WHERE idx=?"; 
         try {
         	con = DBConnection.openConnection();
             psmt = con.prepareStatement(query);
-            psmt.setString(1, idx);
+            psmt.setInt(1, idx);
             psmt.executeUpdate();
         }
         catch (Exception e) {
             System.out.println("게시물 조회수 증가 중 예외 발생");
             e.printStackTrace();
-        }
+        } 
     }
 
  // 추천 횟수를 1 증가시킵니다.
-    public void recommendCountPlus(String idx) {
+    public void recommendCountPlus(int idx) {
         String sql = "UPDATE freeboard SET "
                 + " recommendcount=recommendcount+1 "
                 + " WHERE idx=? "; 
         try {
         	con = DBConnection.openConnection();
             psmt = con.prepareStatement(sql);
-            psmt.setString(1, idx);
+            psmt.setInt(1, idx);
             psmt.executeUpdate();
         }
         catch (Exception e) {}

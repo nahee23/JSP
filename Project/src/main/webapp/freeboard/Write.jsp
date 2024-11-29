@@ -78,7 +78,7 @@
 							
 						<button class="btn btn-primary me-md-2" type="reset">RESET</button>
 						<button class="btn btn-primary me-md-2" type="button"
-							onclick="location.href='List.jsp';">목록 바로가기</button>
+							onclick="location.href='${pageContext.request.contextPath}/ListController?action=LIST';">목록 바로가기</button>
 					</td>
 				</tr>
 			</table>
